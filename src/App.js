@@ -1,15 +1,32 @@
 import React from 'react';
-import Cards from './components/Cards';
-import Chart from './components/Chart';
-import CountryPicker from './components/CountryPicker'
+
+//following line is change with below by adding value in index.js file
+// import Cards from './components/Cards/Cards';
+// import Chart from './components/Chart/Chart';
+// import CountryPicker from './components/CountryPicker/CountryPicker'
+
+
+import {Cards, Chart, CountryPicker} from './components';
+import styles from './App.module.css'
+
+// if only folder given it will automatically search index.js file
+import { fetchData} from './api';
 
 class App extends React.Component {
-    render(){
-        return (<div>
-            <h1>App</h1>
-        </div>)
+    
+    async componentDidMount() {
+        const data = await fetchData();
+        console.log(data);
     }
 
+
+    render(){
+        return (<div className={styles.container}>
+            <Cards/>
+            <CountryPicker/>
+            <Chart/>
+        </div>)
+    }
 }
 
 export default App;

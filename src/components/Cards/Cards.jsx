@@ -1,35 +1,43 @@
 import React from 'react'
 import { Card, CardContent, Typography, Grid } from '@material-ui/core';
+import CountUp from 'react-countup';
 
 import styles from './Cards.module.css'
 
-export default function Cards(props) {
-    console.log(props);
+export default function Cards({data: {confirmed, recovered, deaths, lastUpdate}}) {
+    //console.log(props);
+   // console.log(confirmed);
+    if (!confirmed){
+        return 'Loading...';
+    }
+
     return (
         <div className = {styles.container}>
             <Grid container spacing={3} justify="center">
                 <Grid item component={Card}>
                     <CardContent>
                         <Typography color="textSecondary" gutterBottom> Infected</Typography>
-                        <Typography varient="h5"> REAL DATA</Typography>
+                        <Typography varient="h5"> 
+                            <CountUp start={0} end={confirmed.value} duration={2.5} separator=","/>
+                            </Typography>
                         <Typography color="textSecondary"> REAL DATE</Typography>
                         <Typography varient="body2">Number of active cases of COVID-19</Typography>
                     </CardContent>
                 </Grid>
                 <Grid item component={Card}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterBottom> Infected</Typography>
-                        <Typography varient="h5"> REAL DATA</Typography>
+                        <Typography color="textSecondary" gutterBottom> Recovered</Typography>
+                        <Typography varient="h5"> {recovered.value}</Typography>
                         <Typography color="textSecondary"> REAL DATE</Typography>
-                        <Typography varient="body2">Number of active cases of COVID-19</Typography>
+                        <Typography varient="body2">Number of recoveries cases of COVID-19</Typography>
                     </CardContent>
                 </Grid>
                 <Grid item component={Card}>
                     <CardContent>
-                        <Typography color="textSecondary" gutterBottom> Infected</Typography>
-                        <Typography varient="h5"> REAL DATA</Typography>
+                        <Typography color="textSecondary" gutterBottom> Deaths</Typography>
+                        <Typography varient="h5"> {deaths.value}</Typography>
                         <Typography color="textSecondary"> REAL DATE</Typography>
-                        <Typography varient="body2">Number of active cases of COVID-19</Typography>
+                        <Typography varient="body2">Number of deaths cases by COVID-19</Typography>
                     </CardContent>
                 </Grid>
             </Grid>

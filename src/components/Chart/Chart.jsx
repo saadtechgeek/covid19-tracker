@@ -23,15 +23,27 @@ export default function Chart() {
     const lineChart = (
         dailyData[0]?
         <Line data={{
-              labels: '',
-              datasets: [{},{}]
+              labels: dailyData.map(({date}) => date),
+              datasets: [{
+                data:dailyData.map(({confirmed}) => confirmed),
+                label: 'Infected',
+                borderColor: '#333FF',
+                fill:true
+              },
+              {
+                data:dailyData.map(({deaths}) => deaths),
+                label: 'Deaths',
+                borderColor: 'red',
+                backgroundColor: 'rgba(255,0,0,0.5)',
+                fill:true
+              }]
             }}
         /> : null
     );
 
     return (
-        <div>
-            Chart
+        <div className={styles.container}>
+                {lineChart}
         </div>
     )
 }
